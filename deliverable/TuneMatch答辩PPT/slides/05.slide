@@ -1,0 +1,63 @@
+<Slide style={{ width: 1280, height: 720, background: '#F5F5F7', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 100, flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+    <Box style={{ width: 10, height: 44, background: '#7C3AED', borderRadius: 6 }} />
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1D1D1F' }}>02 · 核心流程演示：AI 对话找歌</Text>
+  </Box>
+  {/* B 内容区：左流程图 右结果 */}
+  <Box style={{ flex: 1, flexDirection: 'row', gap: 28, alignItems: 'center' }}>
+    {/* 左：流程 4 步 */}
+    <Box style={{ flex: 1, gap: 18 }}>
+      {[
+        { n: '①', t: '用户输入', d: '"我想听浪漫的歌"', c: '#0071E3' },
+        { n: '②', t: '语义解析', d: '抽取曲风 romantic / 情绪 浪漫', c: '#7C3AED' },
+        { n: '③', t: '曲库匹配', d: '11 维特征打分 → 排序取 Top5', c: '#FF6B9D' },
+        { n: '④', t: '卡片推送', d: 'SSE 流式返回可点击歌曲卡片', c: '#10B981' },
+      ].map((s, i) => (
+        <Box key={s.n} style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+          <Box style={{ width: 52, height: 52, borderRadius: 14, background: s.c, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 24, color: '#ffffff', fontWeight: 'bold' }}>{s.n}</Text>
+          </Box>
+          <Box style={{ flex: 1, background: '#ffffff', borderRadius: 14, padding: '14px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
+            <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1D1D1F' }}>{s.t}</Text>
+            <Text style={{ fontSize: 15, color: '#6E6E73', marginTop: 2 }}>{s.d}</Text>
+          </Box>
+          {i < 3 && <Text style={{ fontSize: 26, color: s.c, width: 28, textAlign: 'center' }}>↓</Text>}
+        </Box>
+      ))}
+    </Box>
+    {/* 右：推荐结果卡片 */}
+    <Box style={{ flex: 1.05, background: '#ffffff', borderRadius: 20, padding: 26, gap: 14, boxShadow: '0 6px 28px rgba(0,0,0,0.08)' }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#1D1D1F' }}>💬 实际输出（库内真实歌曲）</Text>
+        <Text style={{ fontSize: 15, color: '#10B981' }}>SSE 流式 ✓</Text>
+      </Box>
+      {[
+        { t: 'Levitating', a: 'Dua Lipa', m: '76%', c: '#0071E3' },
+        { t: '喜欢你', a: 'Beyond', m: '74%', c: '#7C3AED' },
+        { t: 'Yellow', a: 'Coldplay', m: '72%', c: '#FF6B9D' },
+        { t: '知足', a: '五月天', m: '71%', c: '#10B981' },
+      ].map((s) => (
+        <Box key={s.t} style={{ flexDirection: 'row', alignItems: 'center', gap: 14, background: '#F5F5F7', borderRadius: 12, padding: '12px 16px' }}>
+          <Box style={{ width: 40, height: 40, borderRadius: 10, background: s.c, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 20, color: '#ffffff' }}>♪</Text>
+          </Box>
+          <Box style={{ flex: 1 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#1D1D1F' }}>《{s.t}》</Text>
+            <Text style={{ fontSize: 14, color: '#6E6E73' }}>{s.a}</Text>
+          </Box>
+          <Box style={{ background: s.c + '22', borderRadius: 20, padding: '6px 14px' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: s.c }}>{s.m}</Text>
+          </Box>
+        </Box>
+      ))}
+      <Box style={{ background: '#F0F9F4', borderRadius: 12, padding: 12 }}>
+        <Text style={{ fontSize: 14, color: '#137A45', textAlign: 'center' }}>点击卡片 → 跳转详情页 → 自动拉取歌词</Text>
+      </Box>
+    </Box>
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#86868B' }}>05 / 12</Text>
+  </Box>
+</Slide>

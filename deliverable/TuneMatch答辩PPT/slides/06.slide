@@ -1,0 +1,41 @@
+<Slide style={{ width: 1280, height: 720, background: '#ffffff', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 100, flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+    <Box style={{ width: 10, height: 44, background: '#0071E3', borderRadius: 6 }} />
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1D1D1F' }}>03 · 技术架构</Text>
+  </Box>
+  {/* B 内容区：三层架构 */}
+  <Box style={{ flex: 1, gap: 16, justifyContent: 'center' }}>
+    {/* 前端层 */}
+    <Box style={{ background: 'linear-gradient(135deg, #0071E3, #4D9BF7)', borderRadius: 18, padding: '22px 28px', gap: 8 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#ffffff' }}>前端层 Frontend</Text>
+        <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)' }}>11 页面 · 10 组件 · Apple 风格 UI</Text>
+      </Box>
+      <Text style={{ fontSize: 17, color: 'rgba(255,255,255,0.95)' }}>Vue 3 · TypeScript · Vite · Tailwind CSS · Pinia · Vue Router · Axios</Text>
+      <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)' }}>SSE 流式对话 · Web Audio 真实播放 · EQ 均衡器 · Mock 离线兜底</Text>
+    </Box>
+    {/* 后端层 */}
+    <Box style={{ background: 'linear-gradient(135deg, #7C3AED, #A78BFA)', borderRadius: 18, padding: '22px 28px', gap: 8 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#ffffff' }}>后端层 Backend</Text>
+        <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)' }}>9 路由模块 · 29+ REST 接口 · 12 服务</Text>
+      </Box>
+      <Text style={{ fontSize: 17, color: 'rgba(255,255,255,0.95)' }}>FastAPI · Uvicorn · SQLAlchemy ORM · Pydantic v2 · SQLite</Text>
+      <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)' }}>推荐引擎 · 歌词服务 · 歌单导入画像 · 配置持久化 · PDF/海报导出</Text>
+    </Box>
+    {/* 数据源层 */}
+    <Box style={{ background: 'linear-gradient(135deg, #FF6B9D, #FF9A76)', borderRadius: 18, padding: '22px 28px', gap: 8 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#ffffff' }}>数据源层 Data</Text>
+        <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)' }}>四源接入 · 无需商业 Key</Text>
+      </Box>
+      <Text style={{ fontSize: 17, color: 'rgba(255,255,255,0.95)' }}>iTunes Search（封面+试听）· Apple RSS 热门榜 · Jamendo 全首曲库 · lyrics.ovh 歌词</Text>
+      <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)' }}>可选：OpenAI SDK（硅基流动/DeepSeek）· ChromaDB 向量检索 · librosa 特征 · ReportLab PDF</Text>
+    </Box>
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#86868B' }}>06 / 12</Text>
+  </Box>
+</Slide>

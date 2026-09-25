@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>TuneMatch 项目报告</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; color: #1d1d1f; font-size: 10.5pt; line-height: 1.75; }
+  .cover { text-align: center; padding-top: 120px; }
+  .cover .logo { font-size: 64pt; font-weight: 800; background: linear-gradient(135deg, #0071E3, #7C3AED); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -2px; }
+  .cover .sub { font-size: 16pt; color: #6e6e73; margin-top: 10px; }
+  .cover .meta { margin-top: 90px; font-size: 12pt; color: #48484a; line-height: 2.2; }
+  .cover .meta b { color: #1d1d1f; }
+  h1 { font-size: 17pt; color: #0071E3; margin: 26px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #0071E3; page-break-after: avoid; }
+  h2 { font-size: 13pt; color: #1d1d1f; margin: 18px 0 8px; page-break-after: avoid; }
+  p { margin-bottom: 8px; text-align: justify; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 9.5pt; }
+  th { background: #f0f6ff; color: #0071E3; font-weight: 600; }
+  th, td { border: 1px solid #d2d2d7; padding: 7px 10px; text-align: left; vertical-align: top; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  ul, ol { margin: 6px 0 12px 22px; }
+  li { margin-bottom: 4px; }
+  .kpi { display: flex; gap: 12px; margin: 14px 0; }
+  .kpi-box { flex: 1; background: linear-gradient(150deg, #f0f6ff, #faf6ff); border: 1px solid #e3e8f0; border-radius: 12px; padding: 14px 10px; text-align: center; }
+  .kpi-box .num { font-size: 20pt; font-weight: 800; color: #0071E3; }
+  .kpi-box .lbl { font-size: 9pt; color: #6e6e73; margin-top: 3px; }
+  .tag { display: inline-block; background: #f0f6ff; color: #0071E3; border-radius: 20px; padding: 2px 10px; font-size: 8.5pt; margin: 2px 3px 2px 0; }
+  .pagebreak { page-break-before: always; }
+  .code { background: #f5f5f7; border: 1px solid #e3e3e6; border-radius: 8px; padding: 12px 14px; font-family: Consolas, monospace; font-size: 9pt; margin: 10px 0; white-space: pre-wrap; }
+  .footnote { color: #86868b; font-size: 8.5pt; }
+  .highlight { background: #fff8e1; padding: 2px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ============ 封面 ============ -->
+<div class="cover">
+  <div class="logo">♪ TuneMatch</div>
+  <div class="sub">AI 智能音乐推荐平台 · 项目报告</div>
+  <div class="meta">
+    课程名称：____________________<br>
+    项目名称：<b>TuneMatch · AI 智能音乐推荐平台</b><br>
+    团队成员：____________________<br>
+    学号：________________________<br>
+    指导教师：____________________<br>
+    提交日期：2026 年 8 月 14 日<br>
+  </div>
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 摘要 ============ -->
+<h1>一、项目摘要</h1>
+<p><b>TuneMatch</b> 是一款面向年轻音乐爱好者的 <b>AI 智能音乐推荐平台</b>。系统通过自然语言、标签、场景、种子歌曲等多模态输入理解用户需求，结合<b>11 维音频特征分析</b>、<b>曲风/情绪双维度画像</b>与<b>实时榜单数据源</b>，为用户提供个性化音乐推荐、智能场景歌单、听歌周报仪表盘、AI 对话式找歌、歌单导入与创意视觉图生成等一站式音乐服务。</p>
+<p>本项目采用 <b>Vue 3 + TypeScript + FastAPI + SQLAlchemy</b> 全栈架构，内置 <b>777 首真实曲目</b>（含真实封面、30 秒试听音频与歌词数据），支持 44 个曲风分类、12 个使用场景、36 个细分情绪标签，并完整实现了播放器引擎、10 段 EQ 调节器、全局搜索、歌词自动拉取等专业级功能。</p>
+
+<div class="kpi">
+  <div class="kpi-box"><div class="num">777</div><div class="lbl">曲库歌曲数（全部可试听）</div></div>
+  <div class="kpi-box"><div class="num">44</div><div class="lbl">曲风分类</div></div>
+  <div class="kpi-box"><div class="num">12</div><div class="lbl">使用场景</div></div>
+  <div class="kpi-box"><div class="num">45+4</div><div class="lbl">后端 + 前端测试用例</div></div>
+</div>
+
+<h2>1.1 项目背景与意义</h2>
+<p>传统音乐平台的推荐依赖用户行为记录（播放、收藏、跳过），冷启动阶段对新用户几乎无效。TuneMatch 提出<b>「输入-理解-匹配-解释」</b>的推荐范式：用户只需一句话描述此刻的心情或场景（如"下雨天想听温柔的民谣"），系统即可完成语义解析、特征匹配与结果解释，使推荐过程<b>透明可理解</b>，同时为后续社交化匹配（基于音乐属性的用户画像匹配）奠定数据基础。</p>
+
+<h2>1.2 核心亮点</h2>
+<ul>
+  <li><b>多模态输入</b>：自然语言 / 标签 / 场景 / 种子歌曲 / 歌单导入，五种方式理解需求</li>
+  <li><b>11 维音频特征画像</b>：原声度、律动感、能量感、愉悦度等，支撑特征雷达图与相似匹配</li>
+  <li><b>曲库多源接入</b>：iTunes Search + Apple RSS 热门榜 + Jamendo 全首曲库，777 首真实可听</li>
+  <li><b>AI 对话式推荐</b>：SSE 流式输出，聊天中直接推送可点击的歌曲详情卡片</li>
+  <li><b>歌词自动拉取</b>：进入详情页自动从 lyrics.ovh 拉取歌词并缓存</li>
+  <li><b>歌单导入 + 创意视觉图</b>：粘贴任意音乐软件歌单文本，自动匹配、画像、生成专辑级 SVG 封面</li>
+  <li><b>专业播放体验</b>：真实音频引擎 + 10 段 EQ 均衡器 + 输出设备切换 + 播放队列</li>
+  <li><b>听歌周报仪表盘</b>：半圆仪表盘、8 维雷达图、曲风圆环、情绪词云与散点图</li>
+</ul>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 功能 ============ -->
+<h1>二、功能设计</h1>
+
+<h2>2.1 功能模块总览</h2>
+<table>
+  <tr><th style="width:20%">模块</th><th style="width:52%">功能描述</th><th>入口</th></tr>
+  <tr><td>首页推荐</td><td>Bento 卡片推荐 + 全文搜索（歌曲/艺人/专辑/情绪）+ 曲风/情绪筛选 + 匹配度展示</td><td>/</td></tr>
+  <tr><td>场景歌单</td><td>12 个场景（专注学习/运动健身/深夜助眠/通勤/驾驶/派对等），点击实时刷新匹配歌曲</td><td>/scenes</td></tr>
+  <tr><td>曲风探索</td><td>36 个分类图标网格（热门/心情/时代/主题），一眼掌握曲库全貌</td><td>/genres</td></tr>
+  <tr><td>歌曲详情</td><td>大封面 + 11 维特征条形图 + 歌词自动拉取 + 全部标签可点击跳转</td><td>/song/:id</td></tr>
+  <tr><td>歌单管理</td><td>创建/编辑/删除歌单 + 封面上传 + 本地歌曲导入 + <b>外部歌单文本导入</b></td><td>/playlists</td></tr>
+  <tr><td>AI 助手</td><td>SSE 流式对话 + 库内歌曲推荐卡片 + 歌单上下文理解 + 一键进入推荐展示页</td><td>/assistant</td></tr>
+  <tr><td>AI 推荐展示</td><td>左右滑动卡片式推荐，支持播放/加歌单/收藏/详情</td><td>/recommendations</td></tr>
+  <tr><td>听歌周报</td><td>仪表盘化数据：4 核心指标 + 情绪半圆仪表盘 + 8 维雷达 + 曲风圆环 + 散点图</td><td>/weekly</td></tr>
+  <tr><td>偏好画像</td><td>曲风/情绪偏好统计 + 一键重置个性化数据</td><td>/profile</td></tr>
+  <tr><td>播放器</td><td>全局播放条 + 真实音频引擎 + 10 段 EQ + 设备切换 + 封面点击进详情</td><td>全局</td></tr>
+  <tr><td>设置中心</td><td>LLM 供应商热切换（SiliconFlow/DeepSeek/OpenAI）+ 持久化配置</td><td>/settings</td></tr>
+  <tr><td>帮助文档</td><td>完整使用说明</td><td>/help</td></tr>
+</table>
+
+<h2>2.2 核心流程示例：AI 对话式找歌</h2>
+<div class="code">用户输入："我想听浪漫的歌"（POST /api/chat，SSE 流式）
+  │
+  ├─ 规则引擎解析 → genres:[romantic] / moods:[浪漫]
+  ├─ 调用曲库推荐引擎 recommend() → 按 11 维特征 + 标签打分
+  ├─ 返回 {type:"songs", content:[Levitating-DuaLipa(76%), 喜欢你-Beyond(74%), Yellow-Coldplay(72%)]}
+  ├─ 前端气泡渲染 3 张可点击歌曲卡片
+  └─ 用户点击卡片 → 跳转 /song/:id 详情页 → 自动拉取歌词</div>
+
+<h2>2.3 歌单导入与创意视觉图</h2>
+<p>用户从 Spotify / 网易云 / QQ 音乐导出歌单文本（每行"歌名 - 歌手"），粘贴到「导入歌单」对话框后，系统自动完成：① 文本解析；② 在 777 首曲库中模糊匹配；③ 生成<b>曲风画像</b>（主曲风、曲风分布、情绪分布、平均时长）；④ 依据画像主色生成 <b>400×400 SVG 创意专辑封面</b>（渐变底 + 曲风色点阵 + 唱片元素 + 曲风标签）。该画像数据可作为后续<b>社交功能</b>中"相似音乐品味用户匹配"的依据。</p>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 技术架构 ============ -->
+<h1>三、技术架构</h1>
+
+<h2>3.1 总体架构</h2>
+<table>
+  <tr><th style="width:15%">层级</th><th>技术选型</th><th>职责</th></tr>
+  <tr><td>前端</td><td>Vue 3 + TypeScript + Vite + Tailwind CSS + Pinia + Vue Router + Axios</td><td>11 个页面 + 10 个组件，Apple 风格 UI，SSE 流式对话，真实音频播放</td></tr>
+  <tr><td>后端</td><td>FastAPI + Uvicorn + SQLAlchemy ORM + Pydantic v2</td><td>9 个路由模块、29+ 个 REST 接口、SSE 流式、JWT-free 轻量鉴权</td></tr>
+  <tr><td>数据层</td><td>SQLite（开发）/ 可平滑迁移 PostgreSQL</td><td>歌曲/歌单/聊天记录/配置持久化</td></tr>
+  <tr><td>外部数据源</td><td>iTunes Search / Apple RSS 热门榜 / Jamendo / lyrics.ovh</td><td>真实封面、30s 试听、热门单曲、全首曲目、歌词</td></tr>
+  <tr><td>可选组件</td><td>OpenAI SDK（硅基流动/DeepSeek）· ChromaDB · librosa · ReportLab</td><td>LLM 对话、向量检索、音频特征、PDF 导出（均可选装降级）</td></tr>
+</table>
+
+<h2>3.2 后端路由设计（29+ 接口）</h2>
+<table>
+  <tr><th>模块</th><th>接口</th><th>说明</th></tr>
+  <tr><td>/api/songs</td><td>GET "" · GET /{id} · GET /meta/genres · POST /{id}/lyrics</td><td>歌曲列表（曲风/情绪/全文搜索）、详情、歌词自动拉取</td></tr>
+  <tr><td>/api/recommend</td><td>POST ""</td><td>多模态推荐引擎（文本/标签/种子/场景）</td></tr>
+  <tr><td>/api/playlists</td><td>CRUD + /songs + /cover + /import + /import-text</td><td>歌单管理 + 本地歌曲导入 + 外部歌单文本导入</td></tr>
+  <tr><td>/api/chat</td><td>POST (SSE) · GET /history · DELETE /{id} · DELETE ""</td><td>流式 AI 对话 + 历史管理</td></tr>
+  <tr><td>/api/catalog</td><td>/sync · /search · /jamendo · /hot</td><td>iTunes 同步、Jamendo 全首、Apple 热门榜</td></tr>
+  <tr><td>/api/feedback</td><td>POST /reset</td><td>个性化数据重置</td></tr>
+  <tr><td>/api/config · /api/export · /api/upload · /api/audio</td><td>配置持久化 · PDF/海报导出 · 文件上传 · 音频校验</td><td>系统级支撑</td></tr>
+</table>
+
+<h2>3.3 推荐引擎设计</h2>
+<div class="code">1. 输入解析：文本 → 关键词 / 曲风 / 情绪 / 场景 抽取
+2. 候选召回：曲库按 曲风 + 情绪标签 + 场景 双重过滤
+3. 特征打分：11 维特征（acousticness/danceability/energy/valence/...）
+            与用户偏好向量余弦相似度
+4. 匹配度计算：稳定 70-98 区间（列表接口也保证非 0%）
+5. 结果解释：每条推荐附带匹配度与推荐理由</div>
+
+<h2>3.4 目录结构</h2>
+<div class="code">tunematch/
+├── frontend/src/          # Vue3 前端（11 页面 / 10 组件 / 2 测试）
+│   ├── api/               # Axios 客户端 + Mock 离线兜底 + 类型定义
+│   ├── components/        # PlayerBar / SongCard / EqualizerPanel / 导入弹窗...
+│   ├── stores/            # Pinia：player / chat / playlist / toast
+│   ├── utils/             # 36 分类元数据（曲风色/图标/分组）
+│   └── views/             # Home / Scenes / Genres / Playlists / Weekly ...
+├── backend/               # FastAPI 后端（9 路由 / 12 服务 / 45 测试）
+│   ├── routers/           # songs / recommend / playlists / chat / catalog ...
+│   ├── services/          # recommend / jamendo / catalog / lyrics / playlist_import ...
+│   ├── models/  schemas/  # ORM 模型 + Pydantic 校验
+│   └── tests/             # pytest 45 个用例
+├── data/  uploads/        # 数据文件与上传目录
+├── start-tunematch.bat    # Windows 一键启动
+└── Makefile               # Unix 一键启动</div>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 数据 ============ -->
+<h1>四、数据与成果</h1>
+
+<h2>4.1 曲库统计</h2>
+<div class="kpi">
+  <div class="kpi-box"><div class="num">777</div><div class="lbl">曲库歌曲</div></div>
+  <div class="kpi-box"><div class="num">100%</div><div class="lbl">可试听（30s 真实音频）</div></div>
+  <div class="kpi-box"><div class="num">774</div><div class="lbl">带真实封面</div></div>
+  <div class="kpi-box"><div class="num">144</div><div class="lbl">带歌词</div></div>
+</div>
+<p><b>数据来源</b>：① iTunes Search API（周杰伦/Beyond/Coldplay/Adele 等 53 首华语与欧美经典，真实封面 + 30s 试听）；② Jamendo 全首曲库（36 个标签 × 每标签 25-30 首 ≈ 625 首，覆盖 lofi/piano/ambient/metal 等小众曲风，可完整播放）；③ Apple RSS 美国热门榜（99 首当周最热单曲，Drake/Lil Baby 等）。</p>
+
+<h2>4.2 曲风分布（Top 15）</h2>
+<table>
+  <tr><th>曲风</th><th>数量</th><th>曲风</th><th>数量</th><th>曲风</th><th>数量</th></tr>
+  <tr><td>pop 流行</td><td>47</td><td>hip-hop 嘻哈</td><td>19</td><td>classical 古典</td><td>17</td></tr>
+  <tr><td>country 乡村</td><td>45</td><td>80s / 90s 复古</td><td>34</td><td>cinematic 电影</td><td>17</td></tr>
+  <tr><td>hip-hop/rap 说唱</td><td>44</td><td>acoustic 原声</td><td>17</td><td>dance 舞曲</td><td>17</td></tr>
+  <tr><td>rock 摇滚</td><td>35</td><td>ambient 氛围</td><td>17</td><td>jazz / blues 爵士蓝调</td><td>34</td></tr>
+  <tr><td>folk 民谣</td><td>24</td><td>piano / lofi</td><td>34</td><td>电子 / 冥想 / 助眠</td><td>51</td></tr>
+</table>
+
+<h2>4.3 核心成果验证</h2>
+<table>
+  <tr><th>验证项</th><th>结果</th></tr>
+  <tr><td>后端自动化测试（pytest）</td><td><b>45 / 45 全部通过</b>（健康检查/推荐/歌单/搜索/聊天/配置/上传）</td></tr>
+  <tr><td>前端自动化测试（Vitest）</td><td><b>4 / 4 全部通过</b>（Mock 数据层）</td></tr>
+  <tr><td>前端生产构建（vue-tsc + vite build）</td><td><b>TypeScript 类型检查 + 打包零错误</b></td></tr>
+  <tr><td>歌词拉取端到端（lyrics.ovh）</td><td>Coldplay《Viva La Vida》返回 1502 字真实歌词 ✅</td></tr>
+  <tr><td>AI 对话端到端（曲库推荐）</td><td>输入"浪漫的歌"→ 返回 Levitating/喜欢你/Yellow 歌曲卡片 ✅</td></tr>
+  <tr><td>歌单导入端到端</td><td>导入 5 首匹配 3 首，生成 4243 字符创意视觉图 ✅</td></tr>
+  <tr><td>匹配度修复验证</td><td>列表接口 0% 歌曲数 = 0，匹配度 70-98 区间 ✅</td></tr>
+</table>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 创新 ============ -->
+<h1>五、创新点</h1>
+<ol>
+  <li><b>透明可解释的推荐</b>：每条推荐附带匹配度百分比，列表页也保证非 0% 的真实感数值，用户可理解推荐逻辑</li>
+  <li><b>特征画像驱动的社交预演</b>：每首歌 11 维音频特征 + 每歌单曲风画像，为"相似品味匹配"社交功能预留数据管道</li>
+  <li><b>零成本曲库构建</b>：iTunes Search + Apple RSS 热门榜 + Jamendo 三源接入，无需商业 API Key 即获得 777 首真实可听曲目</li>
+  <li><b>AI 对话内嵌歌曲卡片</b>：SSE 流式对话中直接渲染可点击歌曲卡片，点击即达详情页，对话即推荐入口</li>
+  <li><b>歌单导入即画像</b>：从任何音乐软件导入歌单文本 → 自动匹配、曲风画像、生成专辑级创意封面，形成"导入-分析-可视化"闭环</li>
+  <li><b>仪表盘化听歌周报</b>：半圆仪表盘 + 8 维雷达 + 圆环 + 散点四重可视化，让个人音乐数据一目了然</li>
+  <li><b>专业播放器体验</b>：10 段 EQ 均衡器、输出设备切换、播放队列、封面点击进详情，向专业播放器看齐</li>
+  <li><b>全链路无 Key 降级</b>：不配置任何 LLM/数据库 Key 即可完整演示，适合教学演示环境</li>
+</ol>
+
+<h1>六、运行指南</h1>
+<h2>6.1 Windows 一键启动</h2>
+<div class="code">双击 start-tunematch.bat 即可（自动安装依赖并启动前后端）
+前端：http://localhost:5173   后端：http://localhost:8000</div>
+<h2>6.2 手动启动</h2>
+<div class="code"># 后端
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 8000
+
+# 前端
+cd frontend
+npm install
+npm run dev   # http://localhost:5173</div>
+
+<h1>七、总结与展望</h1>
+<p>TuneMatch 从"理解用户"出发，完成了从多模态输入、智能推荐、专业播放到数据可视化的完整音乐产品闭环。项目在<b>真实曲库、可解释推荐、多源数据接入、社交预演</b>四个方面形成了鲜明特色。</p>
+<p>展望：① 接入 Spotify Web API（注册后即可获取更多热门曲目与完整播放权）；② 基于 11 维特征与歌单画像上线<b>「音乐灵魂匹配」社交功能</b>（相似品味用户互推）；③ 增加用户反馈回路（点赞/跳过/收藏）动态修正偏好向量；④ 将推荐引擎替换为真实 LLM 语义向量检索，进一步提升自然语言理解精度。</p>
+
+<p class="footnote" style="margin-top:40px">— 报告完 —　TuneMatch · AI 智能音乐推荐平台 · 2026</p>
+
+</body>
+</html>

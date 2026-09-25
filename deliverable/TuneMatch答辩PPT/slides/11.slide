@@ -1,0 +1,34 @@
+<Slide style={{ width: 1280, height: 720, background: 'linear-gradient(135deg, #0F172A, #1E1B4B)', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 90, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#ffffff' }}>总结与展望</Text>
+  </Box>
+  {/* B 内容区：大字 + 三点 */}
+  <Box style={{ flex: 1, gap: 28, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#ffffff', lineHeight: 1.4 }}>
+      从「理解用户」出发，<span style={{ color: '#4DABF7' }}>完成音乐产品的完整闭环</span>
+    </Text>
+    <Box style={{ flexDirection: 'row', gap: 24 }}>
+      {[
+        { t: '真实曲库', d: '777 首可听曲目\n多源接入零成本', c: '#4DABF7', i: 'music' },
+        { t: '可解释推荐', d: '透明匹配度 + 特征解释\n拒绝黑盒', c: '#FF6B9D', i: 'chart-line' },
+        { t: '社交预演', d: '歌单画像数据管道\n未来「灵魂匹配」', c: '#A78BFA', i: 'heart-pulse' },
+      ].map((f) => (
+        <Box key={f.t} style={{ flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 18, padding: 24, gap: 10 }}>
+          <FAIcon name={f.i} style={{ fill: f.c, width: 30, height: 30 }} />
+          <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#ffffff' }}>{f.t}</Text>
+          <Text style={{ fontSize: 16, color: '#94A3B8', lineHeight: 1.7 }}>{f.d}</Text>
+        </Box>
+      ))}
+    </Box>
+    <Box style={{ background: 'rgba(77,171,247,0.12)', border: '1px solid rgba(77,171,247,0.3)', borderRadius: 14, padding: '16px 22px' }}>
+      <Text style={{ fontSize: 17, color: '#93C5FD', lineHeight: 1.7 }}>
+        展望：接入 Spotify 全量曲库 · 上线「音乐灵魂匹配」社交 · 用户反馈回路动态修正偏好向量
+      </Text>
+    </Box>
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#475569' }}>11 / 12</Text>
+  </Box>
+</Slide>

@@ -1,0 +1,5 @@
+# 前端开发
+node_modules/
+dist/
+*.local
+.DS_Store

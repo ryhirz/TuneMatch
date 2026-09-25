@@ -1,0 +1,41 @@
+<Slide style={{ width: 1280, height: 720, background: '#ffffff', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1D1D1F' }}>核心亮点总览</Text>
+  </Box>
+  {/* B 内容区：2×4 图标网格（两行，每行 4 卡） */}
+  <Box style={{ flex: 1, gap: 14, justifyContent: 'center' }}>
+    {[
+      [
+        { icon: 'comments', t: 'AI 对话式推荐', d: 'SSE 流式输出 · 对话内嵌歌曲卡片', c: '#0071E3' },
+        { icon: 'music', t: '专业播放器', d: '10 段 EQ 均衡器 · 输出设备切换', c: '#7C3AED' },
+        { icon: 'chart-line', t: '听歌仪表盘', d: '半圆仪表 · 8 维雷达 · 圆环 · 散点', c: '#FF6B9D' },
+        { icon: 'cloud-arrow-down', t: '歌单导入画像', d: '粘贴歌单 → 画像 + 视觉封面', c: '#10B981' },
+      ],
+      [
+        { icon: 'magnifying-glass', t: '全局全文搜索', d: '歌曲/艺人/专辑/情绪 · 即时下拉', c: '#F59E0B' },
+        { icon: 'note-sticky', t: '歌词自动拉取', d: '详情页自动加载 · lyrics.ovh 缓存', c: '#6366F1' },
+        { icon: 'tags', t: '36 曲风分类', d: '热门/心情/时代/主题 · 图标网格', c: '#EC4899' },
+        { icon: 'route', t: '12 使用场景', d: '学习/健身/助眠/驾驶 · 实时换歌', c: '#0EA5E9' },
+      ],
+    ].map((row, ri) => (
+      <Box key={ri} style={{ flexDirection: 'row', gap: 14, flex: 1 }}>
+        {row.map((f) => (
+          <Box key={f.t} style={{ flex: 1, flexDirection: 'row', gap: 16, alignItems: 'center', background: '#F5F5F7', borderRadius: 16, padding: '14px 18px' }}>
+            <Box style={{ width: 52, height: 52, borderRadius: 14, background: f.c + '22', alignItems: 'center', justifyContent: 'center' }}>
+              <FAIcon name={f.icon} style={{ fill: f.c, width: 24, height: 24 }} />
+            </Box>
+            <Box style={{ flex: 1, gap: 3 }}>
+              <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1D1D1F' }}>{f.t}</Text>
+              <Text style={{ fontSize: 14, color: '#6E6E73', lineHeight: 1.45 }}>{f.d}</Text>
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    ))}
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#86868B' }}>04 / 12</Text>
+  </Box>
+</Slide>

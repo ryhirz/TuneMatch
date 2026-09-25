@@ -1,0 +1,29 @@
+<Slide style={{ width: 1280, height: 720, position: 'relative', background: 'linear-gradient(135deg, #0071E3 0%, #7C3AED 100%)', padding: 0 }}>
+  {/* 装饰音符 */}
+  <Box style={{ position: 'absolute', top: 80, right: 120, opacity: 0.15 }}>
+    <Text style={{ fontSize: 300, color: '#ffffff' }}>♪</Text>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 60, left: 90, opacity: 0.12 }}>
+    <Text style={{ fontSize: 200, color: '#ffffff' }}>♫</Text>
+  </Box>
+  {/* 中心内容 */}
+  <Box style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 24 }}>
+      <Text style={{ fontSize: 120, fontWeight: 'bold', color: '#ffffff', textShadow: '0 4px 24px rgba(0,0,0,0.25)' }}>♪</Text>
+      <Text style={{ fontSize: 88, fontWeight: 'bold', color: '#ffffff', letterSpacing: 2, textShadow: '0 4px 24px rgba(0,0,0,0.25)' }}>TuneMatch</Text>
+    </Box>
+    <Text style={{ fontSize: 28, color: 'rgba(255,255,255,0.92)', marginTop: 16, letterSpacing: 1 }}>AI 智能音乐推荐平台 · 课程项目答辩</Text>
+    <Box style={{ marginTop: 40, flexDirection: 'row', gap: 12 }}>
+      <Box style={{ background: 'rgba(255,255,255,0.18)', border: '1px solid rgba(255,255,255,0.35)', borderRadius: 40, padding: '10px 28px' }}>
+        <Text style={{ fontSize: 18, color: '#ffffff' }}>多模态 AI 推荐</Text>
+      </Box>
+      <Box style={{ background: 'rgba(255,255,255,0.18)', border: '1px solid rgba(255,255,255,0.35)', borderRadius: 40, padding: '10px 28px' }}>
+        <Text style={{ fontSize: 18, color: '#ffffff' }}>777 首真实曲库</Text>
+      </Box>
+      <Box style={{ background: 'rgba(255,255,255,0.18)', border: '1px solid rgba(255,255,255,0.35)', borderRadius: 40, padding: '10px 28px' }}>
+        <Text style={{ fontSize: 18, color: '#ffffff' }}>可解释匹配度</Text>
+      </Box>
+    </Box>
+    <Text style={{ fontSize: 16, color: 'rgba(255,255,255,0.7)', marginTop: 60 }}>2026 年 8 月</Text>
+  </Box>
+</Slide>

@@ -1,0 +1,66 @@
+/* TuneMatch 全局样式 —— Apple Store 设计语言 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  ::selection {
+    background: rgba(0, 113, 227, 0.1);
+  }
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  /* 主按钮：胶囊 980px */
+  .tm-btn {
+    @apply inline-flex items-center gap-[7px] px-[22px] py-[9px] rounded-pill text-[14px] font-medium text-white bg-brand
+      hover:bg-brand-hover hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 cursor-pointer select-none;
+  }
+  .tm-btn:disabled {
+    @apply opacity-40 cursor-not-allowed hover:scale-100;
+  }
+  /* 次按钮：胶囊线框 */
+  .tm-btn-ghost {
+    @apply inline-flex items-center gap-[7px] px-[18px] py-[8px] rounded-pill text-[14px] text-ink
+      bg-card border border-line hover:border-ink/30 transition-colors duration-300 cursor-pointer select-none;
+  }
+  .tm-btn-ghost:disabled {
+    @apply opacity-40 cursor-not-allowed;
+  }
+  /* 危险按钮 */
+  .tm-btn-danger {
+    @apply inline-flex items-center gap-[7px] px-[18px] py-[8px] rounded-pill text-[14px] text-white bg-danger
+      hover:opacity-90 transition-opacity cursor-pointer select-none;
+  }
+  /* 输入框：胶囊 */
+  .tm-input {
+    @apply bg-card border border-line rounded-pill text-[15px] px-4 py-2 text-ink
+      placeholder:text-ink-faint focus:outline-none focus:border-brand transition-colors;
+  }
+}
+
+/* 滚动条（细） */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-ink-faint/40 rounded-pill;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}

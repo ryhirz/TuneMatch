@@ -1,0 +1,56 @@
+<Slide style={{ width: 1280, height: 720, background: '#0F172A', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 90, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#ffffff' }}>04 · 数据成果</Text>
+  </Box>
+  {/* B 内容区：巨型数字 + 圆环 */}
+  <Box style={{ flex: 1, flexDirection: 'row', gap: 40, alignItems: 'center' }}>
+    {/* 左：巨型数字 */}
+    <Box style={{ flex: 1, gap: 20 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'baseline', gap: 16 }}>
+        <Text style={{ fontSize: 150, fontWeight: 'bold', color: '#4DABF7', lineHeight: 1 }}>777</Text>
+        <Text style={{ fontSize: 26, color: '#94A3B8' }}>首</Text>
+      </Box>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#ffffff' }}>真实可听曲库</Text>
+      <Text style={{ fontSize: 17, color: '#94A3B8', lineHeight: 1.8 }}>
+        100% 带 30s 试听音频 · 774 首带真实封面<br />144 首带歌词 · 44 个曲风分类
+      </Text>
+      <Box style={{ flexDirection: 'row', gap: 28, marginTop: 12 }}>
+        <Box>
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FF6B9D' }}>36</Text>
+          <Text style={{ fontSize: 15, color: '#94A3B8' }}>情绪标签</Text>
+        </Box>
+        <Box>
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#10B981' }}>12</Text>
+          <Text style={{ fontSize: 15, color: '#94A3B8' }}>使用场景</Text>
+        </Box>
+        <Box>
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#A78BFA' }}>49</Text>
+          <Text style={{ fontSize: 15, color: '#94A3B8' }}>测试用例全过</Text>
+        </Box>
+      </Box>
+    </Box>
+    {/* 右：曲风分布圆环 */}
+    <Box style={{ flex: 1.1, background: '#1E293B', borderRadius: 20, padding: 24, gap: 8 }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#ffffff' }}>曲风分布 Top 6</Text>
+      <Chart
+        style={{ height: 340 }}
+        chartType='doughnutChart'
+        data={[
+          ['曲风', '数量'],
+          ['流行 pop', 47],
+          ['乡村 country', 45],
+          ['说唱 hip-hop', 44],
+          ['摇滚 rock', 35],
+          ['民谣 folk', 24],
+          ['其他 37 类', 582],
+        ]}
+      />
+      <Text style={{ fontSize: 14, color: '#64748B', textAlign: 'center' }}>数据来源：iTunes Search + Apple RSS 热门榜 + Jamendo</Text>
+    </Box>
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#475569' }}>07 / 12</Text>
+  </Box>
+</Slide>

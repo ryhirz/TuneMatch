@@ -1,0 +1,40 @@
+<Slide style={{ width: 1280, height: 720, background: '#ffffff', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1D1D1F' }}>运行指南</Text>
+  </Box>
+  {/* B 内容区：双代码块 */}
+  <Box style={{ flex: 1, flexDirection: 'row', gap: 28, alignItems: 'stretch' }}>
+    <Box style={{ flex: 1, background: '#1E293B', borderRadius: 18, padding: 24, gap: 14 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <FAIcon name='windows' style={{ fill: '#4DABF7', width: 24, height: 24 }} />
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#ffffff' }}>Windows 一键启动</Text>
+      </Box>
+      <Box style={{ background: '#0F172A', borderRadius: 12, padding: 18, gap: 6 }}>
+        <Text style={{ fontSize: 16, color: '#A5F3FC', fontFamily: 'monospace' }}>双击 start-tunematch.bat</Text>
+        <Text style={{ fontSize: 16, color: '#94A3B8', fontFamily: 'monospace' }}># 自动装依赖并启动前后端</Text>
+        <Text style={{ fontSize: 16, color: '#A5F3FC', fontFamily: 'monospace' }}>前端  →  localhost:5173</Text>
+        <Text style={{ fontSize: 16, color: '#A5F3FC', fontFamily: 'monospace' }}>后端  →  localhost:8000</Text>
+      </Box>
+      <Text style={{ fontSize: 15, color: '#64748B' }}>无任何 Key 配置即可完整演示（全链路降级）</Text>
+    </Box>
+    <Box style={{ flex: 1, background: '#1E293B', borderRadius: 18, padding: 24, gap: 14 }}>
+      <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <FAIcon name='terminal' style={{ fill: '#A78BFA', width: 24, height: 24 }} />
+        <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#ffffff' }}>手动启动</Text>
+      </Box>
+      <Box style={{ background: '#0F172A', borderRadius: 12, padding: 18, gap: 6 }}>
+        <Text style={{ fontSize: 15, color: '#A5F3FC', fontFamily: 'monospace' }}># 后端</Text>
+        <Text style={{ fontSize: 15, color: '#E2E8F0', fontFamily: 'monospace' }}>cd backend</Text>
+        <Text style={{ fontSize: 15, color: '#E2E8F0', fontFamily: 'monospace' }}>uvicorn main:app --port 8000</Text>
+        <Text style={{ fontSize: 15, color: '#A5F3FC', fontFamily: 'monospace' }}># 前端</Text>
+        <Text style={{ fontSize: 15, color: '#E2E8F0', fontFamily: 'monospace' }}>cd frontend && npm run dev</Text>
+      </Box>
+      <Text style={{ fontSize: 15, color: '#64748B' }}>配置 LLM_API_KEY 可解锁真实 AI 自然语言对话</Text>
+    </Box>
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#86868B' }}>10 / 12</Text>
+  </Box>
+</Slide>

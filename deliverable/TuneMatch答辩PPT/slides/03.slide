@@ -1,0 +1,39 @@
+<Slide style={{ width: 1280, height: 720, background: '#F5F5F7', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 100, flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+    <Box style={{ width: 10, height: 44, background: '#0071E3', borderRadius: 6 }} />
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1D1D1F' }}>01 · 项目背景与问题</Text>
+  </Box>
+  {/* B 内容区 */}
+  <Box style={{ flex: 1, flexDirection: 'row', gap: 28, alignItems: 'stretch' }}>
+    {/* 左：问题卡 */}
+    <Box style={{ flex: 1, background: '#ffffff', borderRadius: 20, padding: 30, gap: 16, boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#0071E3' }}>🚫 传统推荐的两大痛点</Text>
+      <Text style={{ fontSize: 18, color: '#1D1D1F', lineHeight: 1.8 }}>1. <span style={{ fontWeight: 'bold' }}>冷启动困难</span>：新用户无行为数据，推荐靠猜</Text>
+      <Text style={{ fontSize: 18, color: '#1D1D1F', lineHeight: 1.8 }}>2. <span style={{ fontWeight: 'bold' }}>黑盒不透明</span>：系统推荐"为什么"，用户看不懂</Text>
+      <Box style={{ marginTop: 8, background: '#FFF3F5', borderRadius: 14, padding: 18 }}>
+        <Text style={{ fontSize: 17, color: '#D9306C', lineHeight: 1.7 }}>结论：推荐过程需要「输入-理解-匹配-解释」的透明范式</Text>
+      </Box>
+    </Box>
+    {/* 右：方案卡 */}
+    <Box style={{ flex: 1.15, background: 'linear-gradient(150deg, #0071E3, #7C3AED)', borderRadius: 20, padding: 30, gap: 14 }}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#ffffff' }}>✓ TuneMatch 的解法</Text>
+      <Box style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 14, padding: 18, gap: 8 }}>
+        <Text style={{ fontSize: 19, color: '#ffffff', fontWeight: 'bold' }}>多模态输入</Text>
+        <Text style={{ fontSize: 16, color: 'rgba(255,255,255,0.9)' }}>一句话 / 一个场景 / 一组标签 / 一个种子歌曲 / 一份外部歌单</Text>
+      </Box>
+      <Box style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 14, padding: 18, gap: 8 }}>
+        <Text style={{ fontSize: 19, color: '#ffffff', fontWeight: 'bold' }}>可解释匹配度</Text>
+        <Text style={{ fontSize: 16, color: 'rgba(255,255,255,0.9)' }}>每条推荐附带 70-98% 匹配度 + 11 维特征雷达解释</Text>
+      </Box>
+      <Box style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 14, padding: 18, gap: 8 }}>
+        <Text style={{ fontSize: 19, color: '#ffffff', fontWeight: 'bold' }}>画像驱动社交预演</Text>
+        <Text style={{ fontSize: 16, color: 'rgba(255,255,255,0.9)' }}>每首歌/歌单生成音乐属性画像 → 未来「灵魂匹配」社交</Text>
+      </Box>
+    </Box>
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#86868B' }}>03 / 12</Text>
+  </Box>
+</Slide>

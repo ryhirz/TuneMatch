@@ -1,0 +1,32 @@
+<Slide style={{ width: 1280, height: 720, background: '#F5F5F7', padding: '20px 64px' }}>
+  {/* A 标题块 */}
+  <Box style={{ height: 100, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 36, fontWeight: 'bold', color: '#1D1D1F' }}>测试与验证</Text>
+  </Box>
+  {/* B 内容区：表格 */}
+  <Box style={{ flex: 1, justifyContent: 'center' }}>
+    <Table
+      style={{ width: '100%', height: 420 }}
+      defaultTextStyle={{ fontSize: 18, textAlign: 'center', color: '#1D1D1F' }}
+      defaultCellStyle={{ padding: '14px 18px', border: '1px solid #E3E3E6', backgroundColor: '#ffffff' }}
+      cells={[
+        [
+          { text: '验证项', cellStyle: { backgroundColor: '#0071E3', border: '1px solid #0071E3' }, textStyle: { color: '#ffffff', fontWeight: 'bold', fontSize: 19 } },
+          { text: '结果', cellStyle: { backgroundColor: '#0071E3', border: '1px solid #0071E3' }, textStyle: { color: '#ffffff', fontWeight: 'bold', fontSize: 19 } },
+          { text: '说明', cellStyle: { backgroundColor: '#0071E3', border: '1px solid #0071E3' }, textStyle: { color: '#ffffff', fontWeight: 'bold', fontSize: 19 } },
+        ],
+        ['后端自动化测试（pytest）', '45 / 45 通过 ✅', '健康检查 / 推荐 / 歌单 / 搜索 / 聊天 / 上传'],
+        ['前端自动化测试（Vitest）', '4 / 4 通过 ✅', 'Mock 数据层'],
+        ['前端生产构建', '零错误 ✅', 'vue-tsc 类型检查 + vite build'],
+        ['歌词拉取端到端', '1502 字 ✅', 'Coldplay《Viva La Vida》真实歌词'],
+        ['AI 对话端到端', '歌曲卡片 ✅', '输入"浪漫的歌"→ Levitating/喜欢你/Yellow'],
+        ['歌单导入端到端', '匹配 3/5 ✅', '生成 4243 字符创意视觉图'],
+        ['匹配度修复', '0 个 0% ✅', '列表接口匹配度 70-98 区间'],
+      ]}
+    />
+  </Box>
+  {/* C 页脚 */}
+  <Box style={{ height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+    <Text style={{ fontSize: 14, color: '#86868B' }}>09 / 12</Text>
+  </Box>
+</Slide>
