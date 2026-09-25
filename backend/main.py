@@ -22,6 +22,15 @@ from schemas import err, ok
 from services import audio as audio_svc
 from services import chroma, llm
 
+# ---------- 前端静态托管目录（单服务全栈部署） ----------
+# 将前端构建产物放入该目录后，FastAPI 会在同一端口同时提供 /api 与前端页面。
+# 目录不存在时保持纯 API 模式，不影响本地前后端分离联调。
+WEBAPP_DIR: Path = Path(os.getenv("WEBAPP_DIR", "./webapp")).resolve()
+WEBAPP_INDEX: Path = WEBAPP_DIR / "index.html"
+
+# 这些前缀不参与 SPA 兜底（未匹配到就应返回 404，而不是吐 index.html）
+RESERVED_PREFIXES = ("api", "uploads", "docs", "redoc", "openapi.json", "health")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -104,7 +113,10 @@ def health() -> dict:
 
 
 @app.get("/")
-def root() -> dict:
+def root():
+    """根路径：已放置前端产物时返回应用首页，否则返回 API 说明。"""
+    if WEBAPP_INDEX.is_file():
+        return FileResponse(WEBAPP_INDEX)
     return ok({
         "name": "TuneMatch API",
         "docs": "/docs",
@@ -143,3 +155,26 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 @app.exception_handler(Exception)
 async def global_error_handler(request: Request, exc: Exception) -> JSONResponse:
     return JSONResponse(status_code=500, content=err(500, f"服务异常: {exc}"))
+
+
+# ---------- 前端静态资源托管 + SPA 兜底路由 ----------
+# 仅当 webapp/ 内存在 index.html 时启用。
+# 注册顺序必须在所有 /api 路由之后，否则通配路由会抢先匹配，导致接口全部返回 index.html。
+if WEBAPP_INDEX.is_file():
+    from fastapi.staticfiles import StaticFiles
+
+    _assets_dir = WEBAPP_DIR / "assets"
+    if _assets_dir.is_dir():
+        app.mount("/assets", StaticFiles(directory=str(_assets_dir)), name="webapp-assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def spa_fallback(full_path: str):
+        """未命中接口与静态资源的路径，统一回落到 index.html（支撑前端 history 路由）。"""
+        if full_path.split("/", 1)[0] in RESERVED_PREFIXES:
+            return JSONResponse(status_code=404, content=err(404, "Not Found"))
+        if full_path:
+            candidate = (WEBAPP_DIR / full_path).resolve()
+            # 防目录穿越：解析结果必须仍位于 WEBAPP_DIR 内
+            if candidate.is_file() and str(candidate).startswith(str(WEBAPP_DIR)):
+                return FileResponse(candidate)
+        return FileResponse(WEBAPP_INDEX)

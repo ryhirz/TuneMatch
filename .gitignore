@@ -19,6 +19,9 @@ frontend/vite.config.d.ts
 deliverable/**/.cache/
 deliverable/**/.slidep/
 
+# ---------- 部署打包产物（由 scripts/build_fullstack_deploy.py 生成）----------
+deploy/
+
 # ---------- 运行时产物 / 用户上传（不入库）----------
 uploads/
 backend/uploads/

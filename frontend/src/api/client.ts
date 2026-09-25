@@ -2,7 +2,14 @@
 import axios from 'axios'
 import type { ApiResponse } from './types'
 
-const baseURL = import.meta.env.VITE_API_BASE || 'http://localhost:8000'
+// API 基址解析：
+// - 开发环境：默认 http://localhost:8000（可用 VITE_API_BASE 覆盖）
+// - 生产构建：默认相对基址 ''（与页面同源 —— 前端由后端一并托管，避免跨域与写死域名）
+// - 生产环境忽略 localhost 基址（对访客浏览器而言 localhost 指向其本机，必然请求失败）
+const ENV_BASE = (import.meta.env.VITE_API_BASE as string | undefined)?.trim() || ''
+const isLocalhostBase = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/i.test(ENV_BASE)
+const useEnvBase = ENV_BASE !== '' && !(import.meta.env.PROD && isLocalhostBase)
+const baseURL = useEnvBase ? ENV_BASE : import.meta.env.DEV ? 'http://localhost:8000' : ''
 
 export const http = axios.create({
   baseURL,
