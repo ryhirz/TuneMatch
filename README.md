@@ -53,7 +53,7 @@ tunematch/
 │   ├── models/ schemas/      # SQLAlchemy 模型 + Pydantic v2 校验
 │   ├── tests/                # pytest（45 用例全绿，零外部依赖）
 │   └── tunematch.db          # SQLite 曲库（777 首）
-├── data/music_library.json   # 50 首种子曲库（含 mood_tags / cover_color）
+├── data/music_library.json   # 777 首种子曲库镜像（含 mood_tags / cover_color）
 ├── scripts/init_library.py   # 曲库导入（SQLite + ChromaDB）
 ├── .github/workflows/ci.yml  # GitHub Actions：后端 pytest + 前端 build/test
 ├── .env.example
@@ -93,11 +93,46 @@ npm run dev
 
 > 也可以使用 Makefile：`make seed && make backend` / `make frontend`
 
+## 🚢 线上部署（单服务全栈）
+
+部署平台只暴露**一个端口**，因此把「后端 + 曲库 + 前端产物」打成一份，由 FastAPI 在同一端口同时提供 `/api/*` 与前端页面（同源，无跨域、无需配置 API 地址）。
+
+```bash
+# 1. 构建前端产物
+cd frontend && npm run build && cd ..
+
+# 2. 组装部署目录 tunematch/deploy/（后端源码 + 曲库 + webapp/，约 2MB）
+python scripts/build_fullstack_deploy.py
+
+# 3. 以 deploy/ 为项目目录发布（Python 服务）
+#    installCmd: pip install -r requirements.txt
+#    startCmd:   MUSIC_LIBRARY_PATH=./data/music_library.json uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+```
+
+| 环境变量 | 说明 |
+|---|---|
+| `WEBAPP_DIR` | 前端产物目录，默认 `./webapp`；目录内无 `index.html` 时自动退回纯 API 模式 |
+| `MUSIC_LIBRARY_PATH` | 曲库种子路径；部署时需指向包内副本 `./data/music_library.json` |
+
+实现要点（`backend/main.py`）：
+
+- 通配兜底路由注册在**所有 `/api` 路由之后**，否则接口会被抢先匹配成 `index.html`
+- `api` / `uploads` / `docs` / `redoc` / `openapi.json` / `health` 为保留前缀，未命中返回 404 JSON 而非 HTML
+- 静态文件解析后校验仍在 `WEBAPP_DIR` 内，防目录穿越
+- `config.py` 中 DB / 上传 / 导出路径均为 **CWD 相对**，必须以部署目录为工作目录启动
+
+> 不直接部署 `backend/` 的原因：`backend/uploads/` 含本地测试音视频（约 43MB）与演示无关；且部署平台会排除 `dist/` 这类构建产物目录名，故前端产物统一落在 `webapp/`。
+
 ## 🖼️ 演示
 
+- **在线 Demo（全栈，推荐用这个）**：https://1d1b65ea9e5841928436535de31eda1d.app.workbuddy.host
+  - 含真实后端：AI 对话（SSE）/ AI 推荐 / 歌词 / 歌单 CRUD 均可用
+  - 未配置 LLM Key，走规则引擎降级，因此**打开即用、不会白屏**
 - 本地运行：见上方「快速开始」，无需任何 API Key 即可完整体验。
 - 项目报告与答辩材料：`deliverable/TuneMatch项目报告.pdf`、`deliverable/TuneMatch答辩PPT/`
-- 在线 Demo：_（部署中，上线后回填链接）_
+
+> 另有早期的前端-only Demo（Mock 模式，仅浏览/搜索/播放器可用）：
+> https://86b0ecee05d84dd7a00858997e60f4d4.app.workbuddy.host —— 已被全栈版取代，保留仅为对照。
 
 ## 🔑 LLM 供应商切换
 
@@ -171,7 +206,7 @@ CI 配置见 `.github/workflows/ci.yml`，push / PR 自动运行后端测试与�
 | `DATABASE_URL` | SQLite 连接串 | 否（默认 ./tunematch.db） |
 | `CHROMA_PERSIST_DIR` | ChromaDB 持久化目录 | 否 |
 | `ACOUSTID_API_KEY` | 识曲服务 key | 否 |
-| `VITE_API_BASE` | 前端 API 地址 | 否（默认 :8000） |
+| `VITE_API_BASE` | 前端 API 地址 | 否（开发默认 `http://localhost:8000`；生产构建默认同源相对基址） |
 
 > `.env` 与 `data/settings.json` 已在 `.gitignore` 中忽略，密钥不会入库。
 
@@ -187,6 +222,7 @@ CI 配置见 `.github/workflows/ci.yml`，push / PR 自动运行后端测试与�
 - [x] 前端 Vitest 通过（**4** 用例）
 - [x] GitHub Actions CI 绿灯
 - [x] 前后端联调打通（Vite proxy `/api` → :8000）
+- [x] 线上全栈 Demo 已上线并验证（单端口：前端 SPA + `/api` 同源，AI 对话 / 推荐 / 歌词走真实后端）
 
 ## 📄 许可
 
