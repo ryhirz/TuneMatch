@@ -12,6 +12,39 @@
 
 ---
 
+## 🚀 30 秒上手
+
+**两条路，挑一条走：**
+
+### A · 只想看看效果 → 直接点开在线 Demo
+
+**🔗 https://1d1b65ea9e5841928436535de31eda1d.app.workbuddy.host**
+
+不用安装、不用注册、不需要任何 Key。建议按这个顺序点：
+
+| 步骤 | 做什么 | 你会看到 |
+|---|---|---|
+| 1 | 首页输入「适合学习的轻音乐」 | 带**匹配度**的推荐列表 + 推荐理由 |
+| 2 | 进入 **AI 助手**，说「想听浪漫的歌」 | SSE **流式**回复，逐字吐字 + 歌曲卡片 |
+| 3 | 点任意歌曲进详情页 | 真实封面 + 歌词 + 可直接播放的音频 |
+
+> ✅ Demo 跑的是**真实后端**，不是静态录屏：AI 对话 / 推荐 / 歌词 / 歌单读写全部在线。
+> ℹ️ 未配置 LLM Key，自动走规则引擎降级 —— 这是刻意设计：**无 Key、甚至断网也不白屏**。
+
+### B · 想本地跑起来 → 复制这几行
+
+```bash
+git clone https://github.com/ryhirz/TuneMatch.git && cd TuneMatch
+cd backend  && pip install -r requirements.txt && uvicorn main:app --port 8000   # 终端 1
+cd frontend && npm install && npm run dev                                        # 终端 2
+```
+
+打开 **http://localhost:5173** —— 曲库 **777 首已随仓库附带**（`backend/tunematch.db`），无需额外准备数据。
+
+> 详细步骤、环境要求、常见报错见 **[QUICKSTART.md](QUICKSTART.md)**。
+
+---
+
 ## ✨ 核心亮点
 
 - **多模态输入**：自然语言 / 标签 / 种子歌曲 / 音频（识曲 / 特征）四种方式
@@ -65,8 +98,8 @@ tunematch/
 
 ```bash
 # 0. 克隆
-git clone https://github.com/ryhirz/tunematch.git
-cd tunematch
+git clone https://github.com/ryhirz/TuneMatch.git
+cd TuneMatch
 ```
 
 ### 1. 后端（端口 8000）
@@ -128,11 +161,11 @@ python scripts/build_fullstack_deploy.py
 - **在线 Demo（全栈，推荐用这个）**：https://1d1b65ea9e5841928436535de31eda1d.app.workbuddy.host
   - 含真实后端：AI 对话（SSE）/ AI 推荐 / 歌词 / 歌单 CRUD 均可用
   - 未配置 LLM Key，走规则引擎降级，因此**打开即用、不会白屏**
-- 本地运行：见上方「快速开始」，无需任何 API Key 即可完整体验。
+- 本地运行：见上方「🚀 30 秒上手 → B」或 [QUICKSTART.md](QUICKSTART.md)，无需任何 API Key 即可完整体验。
 - 项目报告与答辩材料：`deliverable/TuneMatch项目报告.pdf`、`deliverable/TuneMatch答辩PPT/`
 
-> 另有早期的前端-only Demo（Mock 模式，仅浏览/搜索/播放器可用）：
-> https://86b0ecee05d84dd7a00858997e60f4d4.app.workbuddy.host —— 已被全栈版取代，保留仅为对照。
+> Demo 为免费沙箱托管，**首次访问可能需 10~20 秒冷启动**；若长时间无响应请刷新一次。
+> 线上 SQLite 是沙箱临时副本，你在 Demo 里创建的歌单**不会写回仓库**，也不影响本地。
 
 ## 🔑 LLM 供应商切换
 
