@@ -17,7 +17,7 @@
 - **多模态输入**：自然语言 / 标签 / 种子歌曲 / 音频（识曲 / 特征）四种方式
 - **LLM 供应商可热切换**：默认硅基流动（SiliconFlow），支持 DeepSeek / OpenAI / 任意 OpenAI 兼容端点
 - **全链路无 Key 降级**：不配任何 Key 即可完整演示（规则解析 + 模板理由 + Mock 曲库）
-- **真实曲库**：SQLite `backend/tunematch.db` 共 **777 首**（iTunes 真实封面/试听 + Jamendo CC 全曲 + Apple 热门榜），另附 `data/music_library.json` 50 首种子
+- **真实曲库**：SQLite `backend/tunematch.db` 共 **777 首**（iTunes 真实封面/试听 + Jamendo CC 全曲 + Apple 热门榜）；`data/music_library.json` 与 `frontend/src/assets/music_library.json` 均为从曲库导出的 **777 首**镜像（前端离线兜底 / 离线重建种子，口径与数据库一致）
 - **统一响应格式**：`{code, message, data}`，前端自动 Mock 兜底
 - **可验证**：GitHub Actions CI（后端 pytest + 前端构建/测试）绿灯
 

@@ -1,4 +1,4 @@
-// Mock 模式：后端未启动时提供静态 JSON 兜底（50 首真实曲库）
+// Mock 模式：后端未启动时提供静态 JSON 兜底（777 首，与后端曲库口径一致）
 // 与后端响应结构保持一致，前端可无后端独立运行
 import type { ApiResponse, ChatMessage, HealthInfo, Playlist, RecommendParams, RecommendResult, Song } from './types'
 import library from '../assets/music_library.json'
